@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>英文手写体识别系统</title>
+  	<link href="css.css" rel="stylesheet" type="text/css" />
+</head>
+<body style="background:url(2.jpg);background-repeat:no-repeat ;
+background-size:100% 100%;
+background-attachment: fixed;">
+  	<div align="center" >
+	<h1>英文手写体识别系统</h1>
+	<br/><br/>
+	<input type="file" name="pic[]" multiple id="myinput" style="height:30px;width:140px;">
+    <br/><br/>
+     <div>
+	<button onclick="uploadFile()" style="height:30px;width:80px;border-radius:15px;">上传图片</button>
+    <div id="uname-show" style="font-size:10px;"></div>
+      </div>
+  	<br/>
+    <button onclick="showUname()" style="height:30px;width:80px;border-radius:15px;">显示结果</button>
+  </div>
+
+	<script>
+		function uploadFile(){
+			
+
+            var files=document.getElementById("myinput").files;
+            console.log(files)
+
+    for(var i=0;i<files.length;i++){
+
+    	readImage(files[i])
+    }
+            document.getElementById("uname-show").innerHTML = "上传成功" ;
+
+
+	
+
+			function readImage(obj){
+
+		    var xhr = new XMLHttpRequest();
+
+		    var fd = new FormData();
+
+		    fd.append("pic", obj);
+
+			xhr.onreadystatechange = function(){
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					console.log(xhr.responseText);
+				}
+			}
+
+			xhr.open("POST", "upload.php");
+            
+
+			xhr.send(fd);
+              
+              document.getElementById("uname-show").innerHTML = "上传成功" ;
+
+			}
+
+			
+
+			
+		}
+      function showUname(){
+			window.location.href="http://192.144.139.131/upload/03.php" 
+        }
+
+
+	</script>
+</body>	
+</html>
